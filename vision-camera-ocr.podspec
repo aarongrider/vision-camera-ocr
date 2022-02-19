@@ -16,4 +16,5 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
+  s.dependency "GoogleMLKit/TextRecognition", "2.2.0"
 end
