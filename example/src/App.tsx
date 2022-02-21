@@ -28,8 +28,8 @@ export default function App() {
 
   const frameProcessor = useFrameProcessor((frame) => {
     'worklet';
-    const scannedOcr = scanOCR(frame);
-    runOnJS(setOcr)(scannedOcr);
+    const data = scanOCR(frame);
+    runOnJS(setOcr)(data);
   }, []);
 
   React.useEffect(() => {

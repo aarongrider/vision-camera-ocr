@@ -4,7 +4,7 @@ buildscript {
 
   repositories {
     google()
-    jcenter()
+    mavenCentral()
   }
 
   dependencies {
@@ -52,7 +52,7 @@ android {
 
 repositories {
   mavenCentral()
-  jcenter()
+  mavenLocal()
   google()
 
   def found = false
@@ -127,4 +127,7 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  implementation project(':react-native-vision-camera')
+  implementation "androidx.camera:camera-core:1.1.0-alpha08"
 }
