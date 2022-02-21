@@ -87,26 +87,6 @@ public class OCRFrameProcessorPlugin: NSObject, FrameProcessorPluginBase {
         return cornerPointArray
     }
     
-    /*
-    private static func getFrame(_ frameRect: CGRect) -> [String: CGFloat] {
-        
-        let offsetX = (frameRect.midX - ceil(frameRect.width)) / 2.0
-        let offsetY = (frameRect.midY - ceil(frameRect.height)) / 2.0
-
-        let x = frameRect.maxX + offsetX
-        let y = frameRect.minY + offsetY
-
-        return [
-          "x": frameRect.origin.x,
-          "y": frameRect.origin.y,
-          "width": frameRect.width,
-          "height": frameRect.height,
-          "boundingCenterX": frameRect.midX,
-          "boundingCenterY": frameRect.midY
-        ]
-    }
-    */
-    
     private static func getFrame(_ frameRect: CGRect) -> [String: CGFloat] {
         
         let offsetX = (frameRect.midX - ceil(frameRect.width)) / 2.0
