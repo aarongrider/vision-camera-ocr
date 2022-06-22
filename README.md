@@ -38,7 +38,7 @@ import { labelImage } from "vision-camera-image-labeler";
 // ...
 const frameProcessor = useFrameProcessor((frame) => {
   'worklet';
-  const scannedOcr = scanOCR(frame);
+  const scannedOcr = __scanOCR(frame);
 }, []);
 ```
 
