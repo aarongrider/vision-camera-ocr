@@ -33,7 +33,7 @@ module.exports = {
 ## Usage
 
 ```js
-import { labelImage } from "vision-camera-image-labeler";
+import { scanOCR } from "vision-camera-ocr";
 
 // ...
 const frameProcessor = useFrameProcessor((frame) => {
