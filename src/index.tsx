@@ -51,3 +51,5 @@ export function scanOCR(frame: Frame): OCRFrame {
   // @ts-ignore
   return __scanOCR(frame);
 }
+
+export * from './hook';
