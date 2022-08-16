@@ -1,7 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-
-import { runOnJS } from 'react-native-reanimated';
 import {
   StyleSheet,
   View,
@@ -12,25 +10,19 @@ import {
   Alert,
   Clipboard,
 } from 'react-native';
-import { OCRFrame, scanOCR } from 'vision-camera-ocr';
+import { useScanOCR } from 'vision-camera-ocr';
 import {
   useCameraDevices,
-  useFrameProcessor,
   Camera,
 } from 'react-native-vision-camera';
 
 export default function App() {
   const [hasPermission, setHasPermission] = React.useState(false);
-  const [ocr, setOcr] = React.useState<OCRFrame>();
   const [pixelRatio, setPixelRatio] = React.useState<number>(1);
   const devices = useCameraDevices();
   const device = devices.back;
 
-  const frameProcessor = useFrameProcessor((frame) => {
-    'worklet';
-    const data = scanOCR(frame);
-    runOnJS(setOcr)(data);
-  }, []);
+  const [frameProcessor, ocr] = useScanOCR();
 
   React.useEffect(() => {
     (async () => {
