@@ -30,6 +30,24 @@ module.exports = {
 
 > Note: You have to restart metro-bundler for changes in the `babel.config.js` file to take effect.
 
+## Optional (But Recommended) for Android:
+
+> [From the MLKit setup instructions](https://developers.google.com/ml-kit/vision/text-recognition/android). `vision-camera-ocr` does not add this for you automatically.
+
+You can configure your app to automatically download the ML model to the device after your app is installed from the Play Store. To do so, add the following declaration to your app's `AndroidManifest.xml` file:
+
+```xml
+<application ...>
+  ...
+  <meta-data
+      android:name="com.google.mlkit.vision.DEPENDENCIES"
+      android:value="ocr" />
+  <!-- To use multiple models: android:value="ocr,model2,model3" -->
+</application>
+```
+
+If you do not enable install-time model downloads, the model will be downloaded the first time you run the on-device detector. Requests you make before the download has completed will produce no results.
+
 ## Usage
 
 ```js
