@@ -32,6 +32,31 @@ module.exports = {
 
 ## Usage
 
+### With Hook:
+
+```tsx
+import { useScanOCR } from "vision-camera-ocr";
+
+// ...
+const [frameProcessor, ocrData] = useScanOCR();
+React.useEffect(() => {
+  // This effect will run every time the frameprocessor gets different data.
+  if (ocrData) {
+    console.log('Got Data: ', ocrData);
+  }
+}, [ocrData]);
+
+return (
+  <Camera
+    // ...
+    frameProcessor={frameProcessor}
+    frameProcessorFps='auto'
+  />
+)
+```
+
+### Manually:
+
 ```js
 import { scanOCR } from "vision-camera-ocr";
 
