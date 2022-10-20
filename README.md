@@ -1,8 +1,10 @@
-<div align="right">
-<img align="right" src="docs/demo.gif">
+# vision-camera-ocr
+
+<div>
+<img src="docs/demo.gif" height=500>
 </div>
 
-# vision-camera-ocr
+## Summary
 
 A [VisionCamera](https://github.com/mrousavy/react-native-vision-camera) Frame Processor Plugin to preform text detection on images using [**MLKit Vision** Text Recognition](https://developers.google.com/ml-kit/vision/text-recognition).
 
