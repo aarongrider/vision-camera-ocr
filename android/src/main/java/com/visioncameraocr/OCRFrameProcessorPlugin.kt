@@ -60,6 +60,8 @@ class OCRFrameProcessorPlugin: FrameProcessorPlugin("scanOCR") {
             elementMap.putString("text", element.text)
             elementMap.putArray("cornerPoints", element.cornerPoints?.let { getCornerPoints(it) })
             elementMap.putMap("frame", getFrame(element.boundingBox))
+
+            elementArray.pushMap(elementMap)
         }
         return elementArray
     }
