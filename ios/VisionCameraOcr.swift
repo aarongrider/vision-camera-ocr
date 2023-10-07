@@ -4,7 +4,7 @@ import MLKitVision
 import MLKitTextRecognition
 
 @objc(OCRFrameProcessorPlugin)
-public class OCRFrameProcessorPlugin: NSObject, FrameProcessorPluginBase {
+public class OCRFrameProcessorPlugin: FrameProcessorPlugin {
     
     private static var textRecognizer = TextRecognizer.textRecognizer()
     
@@ -105,8 +105,7 @@ public class OCRFrameProcessorPlugin: NSObject, FrameProcessorPluginBase {
         ]
     }
     
-    @objc
-    public static func callback(_ frame: Frame!, withArgs _: [Any]!) -> Any! {
+    public override func callback(_ frame: Frame, withArguments arguments: [AnyHashable: Any]?) -> Any? {
         
         guard (CMSampleBufferGetImageBuffer(frame.buffer) != nil) else {
           print("Failed to get image buffer from sample buffer.")
@@ -130,7 +129,7 @@ public class OCRFrameProcessorPlugin: NSObject, FrameProcessorPluginBase {
         return [
             "result": [
                 "text": result.text,
-                "blocks": getBlockArray(result.blocks),
+                "blocks": OCRFrameProcessorPlugin.getBlockArray(result.blocks),
             ]
         ]
     }
