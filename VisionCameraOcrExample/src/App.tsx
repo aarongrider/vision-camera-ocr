@@ -52,10 +52,10 @@ export default function App() {
     'worklet';
 
     const data = scanOCR(frame);
-    // console.log(
-    //   '🚀 ~ file: App.tsx:31 ~ frameProcessor ~ data:',
-    //   JSON.stringify(data.result?.blocks?.map(_ => _.text).join(','), null, 2),
-    // );
+    console.log(
+      '🚀 ~ file: App.tsx:31 ~ frameProcessor ~ data:',
+      JSON.stringify(data.result?.blocks?.map(_ => _.text).join(','), null, 2),
+    );
     ocr.value = data;
   }, []);
 
@@ -91,6 +91,7 @@ export default function App() {
                   fontSize: 25,
                   justifyContent: 'center',
                   textAlign: 'center',
+                  color: 'black',
                 }}>
                 {block.text}
               </Text>
@@ -119,9 +120,9 @@ export default function App() {
                 event.nativeEvent.layout.width,
               ),
           );
-        }}>
-        {renderOverlay()}
-      </Camera>
+        }}
+      />
+      {renderOverlay()}
     </View>
   ) : (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
