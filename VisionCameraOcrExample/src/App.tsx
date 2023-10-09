@@ -39,9 +39,7 @@ export default function App() {
   // const [ocr, setOcr] = React.useState<any>();
   const [pixelRatio, setPixelRatio] = React.useState<number>(1);
   const [_, setToggle] = React.useState<boolean>(false);
-  const device = useCameraDevice('back', {
-    physicalDevices: ['ultra-wide-angle-camera', 'wide-angle-camera'],
-  });
+  const device = useCameraDevice('back');
   const ocr = useSharedValue(undefined);
 
   useEffect(() => {
