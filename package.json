@@ -69,7 +69,9 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-worklets-core": "*",
+    "react-native-vision-camera": "*"
   },
   "jest": {
     "preset": "react-native",

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
   StyleSheet,
@@ -15,33 +15,28 @@ import {
   useFrameProcessor,
   Camera,
   useCameraDevice,
+  useCameraFormat,
 } from 'react-native-vision-camera';
 
-import {VisionCameraProxy, Frame} from 'react-native-vision-camera';
 import {useSharedValue} from 'react-native-worklets-core';
 
-const plugin = VisionCameraProxy.getFrameProcessorPlugin('scanOCR');
-console.log('🚀 ~ file: App.tsx:23 ~ plugin:', plugin);
-
-/**
- * Scans scanOCR.
- */
-export function scanOCR(frame: Frame): any {
-  'worklet';
-  if (plugin == null) {
-    throw new Error('Failed to load Frame Processor Plugin "scanFaces"!');
-  }
-  return plugin.call(frame);
-}
+import {scanOCR} from 'vision-camera-ocr';
 
 export default function App() {
   const [hasPermission, setHasPermission] = React.useState(false);
-  // const [ocr, setOcr] = React.useState<any>();
+
   const [pixelRatio, setPixelRatio] = React.useState<number>(1);
+  const [targetFps] = useState(60);
   const [_, setToggle] = React.useState<boolean>(false);
+
   const device = useCameraDevice('back');
   const ocr = useSharedValue(undefined);
+  const format = useCameraFormat(device, [
+    {videoResolution: 'max'},
+    {photoResolution: 'max'},
+  ]);
 
+  const fps = Math.min(format?.maxFps ?? 1, targetFps);
   useEffect(() => {
     const a = setInterval(() => {
       /**
@@ -59,7 +54,7 @@ export default function App() {
     const data = scanOCR(frame);
     // console.log(
     //   '🚀 ~ file: App.tsx:31 ~ frameProcessor ~ data:',
-    //   JSON.stringify(data.result.blocks.map(_ => _.text).join(','), null, 2),
+    //   JSON.stringify(data.result?.blocks?.map(_ => _.text).join(','), null, 2),
     // );
     ocr.value = data;
   }, []);
@@ -112,8 +107,11 @@ export default function App() {
         style={[StyleSheet.absoluteFill]}
         frameProcessor={frameProcessor}
         device={device}
-        fps={60}
+        fps={fps}
+        pixelFormat="yuv"
         isActive={true}
+        photo={true}
+        format={format}
         onLayout={(event: LayoutChangeEvent) => {
           setPixelRatio(
             event.nativeEvent.layout.width /
