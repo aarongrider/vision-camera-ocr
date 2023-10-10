@@ -19,16 +19,17 @@ import com.mrousavy.camera.parsers.Orientation
 
 class OCRFrameProcessorPlugin: FrameProcessorPlugin() {
 
-    private fun getBlockArray(blocks: MutableList<Text.TextBlock>): List<HashMap<String, Any>> {
-        val blockArray = mutableListOf<HashMap<String, Any>>()
+    private fun getBlockArray(blocks: MutableList<Text.TextBlock>): List<HashMap<String, Any?>> {
+        val blockArray = mutableListOf<HashMap<String, Any?>>()
 
         for (block in blocks) {
-            val blockMap = HashMap<String, Any>()
+            val blockMap = HashMap<String, Any?>()
 
             blockMap["text"] = block.text
             blockMap["recognizedLanguages"] = getRecognizedLanguages(block.recognizedLanguage)
-            blockMap["cornerPoints"] = block.cornerPoints?.let { getCornerPoints(it) } ?: listOf<Any>()
-            blockMap["frame"] = getFrame(block.boundingBox)
+            blockMap["cornerPoints"] = block.cornerPoints?.let { getCornerPoints(it) }
+            blockMap["frame"] = block.boundingBox?.let { getFrame(it) }
+            blockMap["boundingBox"] = block.boundingBox?.let { getBoundingBox(it) }
             blockMap["lines"] = getLineArray(block.lines)
 
             blockArray.add(blockMap)
@@ -36,16 +37,17 @@ class OCRFrameProcessorPlugin: FrameProcessorPlugin() {
         return blockArray
     }
 
-    private fun getLineArray(lines: MutableList<Text.Line>): List<HashMap<String, Any>> {
-        val lineArray = mutableListOf<HashMap<String, Any>>()
+    private fun getLineArray(lines: MutableList<Text.Line>): List<HashMap<String, Any?>> {
+        val lineArray = mutableListOf<HashMap<String, Any?>>()
 
         for (line in lines) {
-            val lineMap = hashMapOf<String, Any>()
+            val lineMap = hashMapOf<String, Any?>()
 
             lineMap["text"] = line.text
             lineMap["recognizedLanguages"] = getRecognizedLanguages(line.recognizedLanguage)
-            lineMap["cornerPoints"] = line.cornerPoints?.let { getCornerPoints(it) } ?: listOf<Any>()
-            lineMap["frame"] = getFrame(line.boundingBox)
+            lineMap["cornerPoints"] = line.cornerPoints?.let { getCornerPoints(it) }
+            lineMap["frame"] = line.boundingBox?.let { getFrame(it)  }
+            lineMap["boundingBox"] = line.boundingBox?.let { getBoundingBox(it) }
             lineMap["elements"] = getElementArray(line.elements)
 
             lineArray.add(lineMap)
@@ -53,17 +55,18 @@ class OCRFrameProcessorPlugin: FrameProcessorPlugin() {
         return lineArray
     }
 
-    private fun getElementArray(elements: MutableList<Text.Element>): List<HashMap<String, Any>> {
-        val elementArray = mutableListOf<HashMap<String, Any>>()
+    private fun getElementArray(elements: MutableList<Text.Element>): List<HashMap<String, Any?>> {
+        val elementArray = mutableListOf<HashMap<String, Any?>>()
 
         for (element in elements) {
-            val elementMap = hashMapOf<String, Any>()
+            val elementMap = hashMapOf<String, Any?>()
 
             elementMap["text"] = element.text
-            elementMap["cornerPoints"] = element.cornerPoints?.let { getCornerPoints(it) }?: listOf<Any>()
-            elementMap["frame"] = getFrame(element.boundingBox)
-
+            elementMap["cornerPoints"] = element.cornerPoints?.let { getCornerPoints(it) }
+            elementMap["frame"] =  element.boundingBox?.let { getFrame(it)  }
+            elementMap["boundingBox"] = element.boundingBox?.let { getBoundingBox(it) }
             elementArray.add(elementMap)
+
         }
         return elementArray
     }
@@ -96,6 +99,19 @@ class OCRFrameProcessorPlugin: FrameProcessorPlugin() {
             frame["boundingCenterY"] = boundingBox.centerY()
         }
         return frame
+    }
+
+    private fun getBoundingBox(boundingBox: Rect?): HashMap<String, Any> {
+        val box = hashMapOf<String,Any>()
+
+        if (boundingBox != null) {
+            box["left"] = boundingBox.left
+            box["top"] = boundingBox.top
+            box["right"] = boundingBox.right
+            box["bottom"] = boundingBox.bottom
+        }
+
+        return box
     }
 
     override fun callback(frame: Frame, params: Map<String, Any>?): Any? {

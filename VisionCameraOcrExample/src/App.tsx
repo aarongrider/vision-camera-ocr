@@ -54,7 +54,7 @@ export default function App() {
     const data = scanOCR(frame);
     console.log(
       '🚀 ~ file: App.tsx:31 ~ frameProcessor ~ data:',
-      JSON.stringify(data.result?.blocks?.map(_ => _.text).join(','), null, 2),
+      JSON.stringify(data, null, 2),
     );
     ocr.value = data;
   }, []);

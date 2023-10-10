@@ -74,11 +74,11 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleMLKit/MLKitCore (2.2.0):
-    - MLKitCommon (~> 3.0.0)
-  - GoogleMLKit/TextRecognition (2.2.0):
+  - GoogleMLKit/MLKitCore (3.1.0):
+    - MLKitCommon (~> 7.0.0)
+  - GoogleMLKit/TextRecognition (3.1.0):
     - GoogleMLKit/MLKitCore
-    - MLKitTextRecognition (~> 1.3.0)
+    - MLKitTextRecognition (~> 1.4.0-beta5)
   - GoogleToolboxForMac/DebugUtils (2.3.2):
     - GoogleToolboxForMac/Defines (= 2.3.2)
   - GoogleToolboxForMac/Defines (2.3.2)
@@ -104,8 +104,8 @@ PODS:
     - hermes-engine/Pre-built (= 0.72.5)
   - hermes-engine/Pre-built (0.72.5)
   - libevent (2.1.12)
-  - MLImage (1.0.0-beta1)
-  - MLKitCommon (3.0.0):
+  - MLImage (1.0.0-beta3)
+  - MLKitCommon (7.0.0):
     - GoogleDataTransport (~> 9.0)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
@@ -114,15 +114,19 @@ PODS:
     - GoogleUtilitiesComponents (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
     - Protobuf (~> 3.12)
-  - MLKitTextRecognition (1.3.0):
-    - MLKitCommon (~> 3.0)
-    - MLKitVision (~> 1.3)
-  - MLKitVision (1.3.0):
+  - MLKitTextRecognition (1.4.0-beta5):
+    - MLKitCommon (~> 7.0)
+    - MLKitTextRecognitionCommon (= 1.0.0-beta5)
+    - MLKitVision (~> 4.1)
+  - MLKitTextRecognitionCommon (1.0.0-beta5):
+    - MLKitCommon (~> 7.0)
+    - MLKitVision (~> 4.1)
+  - MLKitVision (4.1.0):
     - GoogleToolboxForMac/Logger (~> 2.1)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - GTMSessionFetcher/Core (~> 1.1)
-    - MLImage (= 1.0.0-beta1)
-    - MLKitCommon (~> 3.0)
+    - MLImage (= 1.0.0-beta3)
+    - MLKitCommon (~> 7.0)
     - Protobuf (~> 3.12)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
@@ -131,7 +135,7 @@ PODS:
   - nanopb/encode (2.30909.0)
   - OpenSSL-Universal (1.1.1100)
   - PromisesObjC (2.3.1)
-  - Protobuf (3.24.3)
+  - Protobuf (3.24.4)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -553,7 +557,7 @@ PODS:
     - React-Core
     - react-native-worklets-core
   - VisionCameraOcr (1.0.0):
-    - GoogleMLKit/TextRecognition (= 2.2.0)
+    - GoogleMLKit/TextRecognition (= 3.1.0)
     - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -649,6 +653,7 @@ SPEC REPOS:
     - MLImage
     - MLKitCommon
     - MLKitTextRecognition
+    - MLKitTextRecognitionCommon
     - MLKitVision
     - nanopb
     - OpenSSL-Universal
@@ -761,21 +766,22 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2
-  GoogleMLKit: 85ffdc9641d05311c76dbba5bbf93059087be12f
+  GoogleMLKit: 9d072522949ff0ef4dae5359feaf3db2ef2fa658
   GoogleToolboxForMac: 8bef7c7c5cf7291c687cf5354f39f9db6399ad34
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
   GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   hermes-engine: f6cf92a471053245614d9d8097736f6337d5b86c
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  MLImage: 647f3d580c10b3c9a3f6154f5d7baead60c42a0c
-  MLKitCommon: 6d6be0a2e9a6340aad1c1f2b9449c11dee8af70f
-  MLKitTextRecognition: fd52b7b3cef00751c202475f5a147e9752130767
-  MLKitVision: 26da299aef93291f24f5200e8372919f73abf3b5
+  MLImage: 489dfec109f21da8621b28d476401aaf7a0d4ff4
+  MLKitCommon: 20f4aca0ec2bb37cef2b9c211b50586817bac5d3
+  MLKitTextRecognition: 46c6574e7db6452f5a426312c04a794c82d6fcf0
+  MLKitTextRecognitionCommon: 9f66172593cedc9654d56bf9b3d1044c054e2c41
+  MLKitVision: 639a171d937241f3fcf92bc1b3ef8f179f49916c
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  Protobuf: 970f7ee93a3a08e3cf64859b8efd95ee32b4f87f
+  Protobuf: 351e9022fe13a6e2af00e9aefc22077cb88520f8
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: df81ab637d35fac9e6eb94611cfd20f0feb05455
   RCTTypeSafety: 4636e4a36c7c2df332bda6d59b19b41c443d4287
@@ -811,7 +817,7 @@ SPEC CHECKSUMS:
   ReactCommon: 91ece8350ebb3dd2be9cef662abd78b6948233c0
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   VisionCamera: f649cd0c0fa6266f1cd5e0787a7c9583ca143b3a
-  VisionCameraOcr: f5d1dcb695a6d75c7b1fe254b961b2ecad8efc58
+  VisionCameraOcr: 875ef938cbe4a7a1d58da7d465fa8376dc819323
   Yoga: 86fed2e4d425ee4c6eab3813ba1791101ee153c6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
