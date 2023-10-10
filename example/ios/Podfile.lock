@@ -556,7 +556,7 @@ PODS:
     - React-callinvoker
     - React-Core
     - react-native-worklets-core
-  - VisionCameraOcr (1.0.0):
+  - VisionCameraOcr (2.0.0):
     - GoogleMLKit/TextRecognition (= 3.1.0)
     - React-Core
   - Yoga (1.14.0)
@@ -817,7 +817,7 @@ SPEC CHECKSUMS:
   ReactCommon: 91ece8350ebb3dd2be9cef662abd78b6948233c0
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   VisionCamera: f649cd0c0fa6266f1cd5e0787a7c9583ca143b3a
-  VisionCameraOcr: 875ef938cbe4a7a1d58da7d465fa8376dc819323
+  VisionCameraOcr: b347bc2afb7a09ac4b7813f302c21bab68a7b760
   Yoga: 86fed2e4d425ee4c6eab3813ba1791101ee153c6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
