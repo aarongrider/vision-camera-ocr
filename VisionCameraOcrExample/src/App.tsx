@@ -2,11 +2,9 @@
 import React, {useEffect, useState} from 'react';
 
 import {
-  StyleSheet,
   View,
   Text,
   LayoutChangeEvent,
-  PixelRatio,
   TouchableOpacity,
   Alert,
   Clipboard,
@@ -23,40 +21,55 @@ import {useSharedValue} from 'react-native-worklets-core';
 import {scanOCR} from 'vision-camera-ocr';
 
 export default function App() {
-  const [hasPermission, setHasPermission] = React.useState(false);
+  const [dimensions, setDimensions] = useState({width: 1, height: 1});
 
-  const [pixelRatio, setPixelRatio] = React.useState<number>(1);
+  const ocrRef = useSharedValue(undefined);
+  const frameWidthAndHeightRef = useSharedValue({height: 1, width: 1});
+
+  /**
+   * Camera
+   */
+  const [hasPermission, setHasPermission] = React.useState(false);
   const [targetFps] = useState(60);
-  const [_, setToggle] = React.useState<boolean>(false);
+
+  const [ocr, setOcr] = useState<any>();
 
   const device = useCameraDevice('back');
-  const ocr = useSharedValue(undefined);
   const format = useCameraFormat(device, [
     {videoResolution: 'max'},
     {photoResolution: 'max'},
   ]);
 
   const fps = Math.min(format?.maxFps ?? 1, targetFps);
+
   useEffect(() => {
-    const a = setInterval(() => {
+    const timer = setInterval(() => {
       /**
        * Warning: this is needed to trigger the re-rendering of the overlay.
        */
-      setToggle(old => !old);
+      if (ocrRef.value) {
+        setOcr(ocrRef.value);
+      }
     }, 500);
 
-    return () => clearInterval(a);
-  }, []);
+    return () => clearInterval(timer);
+  }, [ocrRef.value]);
 
   const frameProcessor = useFrameProcessor(frame => {
     'worklet';
 
+    frameWidthAndHeightRef.value = {
+      height: frame.height,
+      width: frame.width,
+    };
+
     const data = scanOCR(frame);
     console.log(
-      '🚀 ~ file: App.tsx:31 ~ frameProcessor ~ data:',
-      JSON.stringify(data, null, 2),
+      '🚀 ~ file: App.tsx:68 ~ frameProcessor ~ data:',
+      data.result?.blocks?.map(_ => _.text),
     );
-    ocr.value = data;
+
+    ocrRef.value = {...data};
   }, []);
 
   React.useEffect(() => {
@@ -69,18 +82,23 @@ export default function App() {
   const renderOverlay = () => {
     return (
       <>
-        {ocr.value?.result?.blocks?.map(block => {
+        {ocr?.result?.blocks?.map((block, index) => {
+          const convertedWidth =
+            frameWidthAndHeightRef.value.width / dimensions.width;
+          const convertedHeight =
+            frameWidthAndHeightRef.value.height / dimensions.height;
+
           return (
             <TouchableOpacity
-              key={block.text}
+              key={`${index}-${block.text}+${new Date().getTime()}}`}
               onPress={() => {
                 Clipboard.setString(block.text);
                 Alert.alert(`"${block.text}" copied to the clipboard`);
               }}
               style={{
                 position: 'absolute',
-                left: block.frame.x * pixelRatio,
-                top: block.frame.y * pixelRatio,
+                left: block.frame.x / convertedHeight,
+                top: block.frame.y / convertedWidth,
                 backgroundColor: 'white',
                 padding: 8,
                 borderRadius: 6,
@@ -103,27 +121,26 @@ export default function App() {
   };
 
   return device !== undefined && hasPermission ? (
-    <View style={{flex: 1}}>
+    <>
       <Camera
-        style={[StyleSheet.absoluteFill]}
+        style={{width: '100%', height: '100%', flex: 1}}
         frameProcessor={frameProcessor}
         device={device}
         fps={fps}
         pixelFormat="yuv"
         isActive={true}
         photo={true}
+        orientation="portrait"
         format={format}
         onLayout={(event: LayoutChangeEvent) => {
-          setPixelRatio(
-            event.nativeEvent.layout.width /
-              PixelRatio.getPixelSizeForLayoutSize(
-                event.nativeEvent.layout.width,
-              ),
-          );
-        }}
-      />
-      {renderOverlay()}
-    </View>
+          setDimensions({
+            height: event.nativeEvent.layout.height,
+            width: event.nativeEvent.layout.width,
+          });
+        }}>
+        {renderOverlay()}
+      </Camera>
+    </>
   ) : (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>No available cameras</Text>
