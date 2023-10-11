@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 import {
   View,
@@ -16,14 +16,13 @@ import {
   useCameraFormat,
 } from 'react-native-vision-camera';
 
-import {useSharedValue} from 'react-native-worklets-core';
+import {useSharedValue, Worklets} from 'react-native-worklets-core';
 
 import {scanOCR} from 'vision-camera-ocr';
 
 export default function App() {
   const [dimensions, setDimensions] = useState({width: 1, height: 1});
 
-  const ocrRef = useSharedValue(undefined);
   const frameWidthAndHeightRef = useSharedValue({height: 1, width: 1});
 
   /**
@@ -33,6 +32,7 @@ export default function App() {
   const [targetFps] = useState(60);
 
   const [ocr, setOcr] = useState<any>();
+  const setOcrJS = Worklets.createRunInJsFn(setOcr);
 
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
@@ -41,19 +41,6 @@ export default function App() {
   ]);
 
   const fps = Math.min(format?.maxFps ?? 1, targetFps);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      /**
-       * Warning: this is needed to trigger the re-rendering of the overlay.
-       */
-      if (ocrRef.value) {
-        setOcr(ocrRef.value);
-      }
-    }, 500);
-
-    return () => clearInterval(timer);
-  }, [ocrRef.value]);
 
   const frameProcessor = useFrameProcessor(frame => {
     'worklet';
@@ -69,7 +56,7 @@ export default function App() {
       data.result?.blocks?.map(_ => _.text),
     );
 
-    ocrRef.value = {...data};
+    setOcrJS({...data});
   }, []);
 
   React.useEffect(() => {
