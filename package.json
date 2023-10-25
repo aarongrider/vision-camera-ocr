@@ -36,7 +36,10 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/ismael/vision-camera-ocr",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismael/vision-camera-ocr.git"
+  },
   "author": "Ismael Sousa <ismael1998sousa@gmail.com> (https://github.com/ismaelsousa)",
   "license": "MIT",
   "bugs": {
