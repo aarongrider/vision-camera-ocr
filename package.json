@@ -48,7 +48,8 @@
   },
   "homepage": "https://github.com/ismaelsousa/vision-camera-ocr#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "^3.0.0",
