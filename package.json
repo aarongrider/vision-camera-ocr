@@ -1,6 +1,6 @@
 {
-  "name": "vision-camera-ocr-2",
-  "version": "2.0.0",
+  "name": "@ismaelsousa/vision-camera-ocr",
+  "version": "1.0.0",
   "description": "VisionCamera Frame Processor Plugin to provide OCR support",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -36,13 +36,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/aarongrider/vision-camera-ocr",
-  "author": "Aaron Grider <aaron.grider@gmail.com> (https://github.com/aarongrider)",
+  "repository": "https://github.com/ismael/vision-camera-ocr",
+  "author": "Ismael Sousa <ismael1998sousa@gmail.com> (https://github.com/ismaelsousa)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aarongrider/vision-camera-ocr/issues"
+    "url": "https://github.com/ismaelsousa/vision-camera-ocr/issues"
   },
-  "homepage": "https://github.com/aarongrider/vision-camera-ocr#readme",
+  "homepage": "https://github.com/ismaelsousa/vision-camera-ocr#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
