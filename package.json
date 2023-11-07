@@ -14,7 +14,7 @@
     "android",
     "ios",
     "cpp",
-    "vision-camera-ocr.podspec",
+    "VisionCameraOcr.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
