@@ -56,6 +56,7 @@ public class OCRFrameProcessorPlugin: FrameProcessorPlugin {
                 "cornerPoints": getCornerPoints(element.cornerPoints),
                 "frame": getFrame(element.frame),
                 "boundingBox": getBoundingBox(element.frame) as Any,
+                "symbols": []
             ])
         }
         

@@ -65,11 +65,31 @@
              elementMap["cornerPoints"] = element.cornerPoints?.let { getCornerPoints(it) }
              elementMap["frame"] =  element.boundingBox?.let { getFrame(it)  }
              elementMap["boundingBox"] = element.boundingBox?.let { getBoundingBox(it) }
+             elementMap["symbols"] = this.getSymbolArray(element)
+
              elementArray.add(elementMap)
 
          }
          return elementArray
      }
+
+     private  fun getSymbolArray(element: Text.Element): MutableList<HashMap<String, Any?>> {
+         val symbolsArray =mutableListOf<HashMap<String, Any?>>()
+
+         for (symbol in element.symbols) {
+             val symbolMap = hashMapOf<String, Any?>()
+
+             symbolMap["text"] = symbol.text
+             symbolMap["cornerPoints"] = symbol.cornerPoints?.let { getCornerPoints(it) }
+             symbolMap["frame"] =  symbol.boundingBox?.let { getFrame(it)  }
+             symbolMap["boundingBox"] = symbol.boundingBox?.let { getBoundingBox(it) }
+             symbolsArray.add(symbolMap)
+
+         }
+         return symbolsArray
+     }
+
+     
 
      private fun getRecognizedLanguages(recognizedLanguage: String): List<String> {
          return  listOf(recognizedLanguage)
