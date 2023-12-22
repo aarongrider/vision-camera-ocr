@@ -10,8 +10,11 @@
 
  class VisionCameraOcrPackage : ReactPackage {
      override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-         FrameProcessorPluginRegistry.addFrameProcessorPlugin("scanOCR") {
-             OCRFrameProcessorPlugin(it)
+         if(!OCRFrameProcessorPlugin.isRegistered){
+             OCRFrameProcessorPlugin.isRegistered = true
+             FrameProcessorPluginRegistry.addFrameProcessorPlugin("scanOCR") {
+                 OCRFrameProcessorPlugin(it)
+             }
          }
          return emptyList()
      }

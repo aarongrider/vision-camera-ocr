@@ -133,6 +133,6 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
   implementation project(':react-native-vision-camera')
-  implementation "com.google.mlkit:text-recognition:16.0.0-beta4"
+  implementation "com.google.mlkit:text-recognition:16.0.0"
   implementation "androidx.camera:camera-core:1.1.0"
 }
