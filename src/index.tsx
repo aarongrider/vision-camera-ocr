@@ -19,11 +19,19 @@ type BoundingBox = {
 
 type Point = { x: number; y: number };
 
+type Symbol = {
+  text: string;
+  cornerPoints?: Point[];
+  frame?: BoundingFrame;
+  boundingBox?: BoundingBox;
+};
+
 type TextElement = {
   text: string;
   frame?: BoundingFrame;
   boundingBox?: BoundingBox;
   cornerPoints?: Point[];
+  symbols?: Symbol[];
 };
 
 type TextLine = {
