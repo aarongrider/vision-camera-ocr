@@ -556,7 +556,7 @@ PODS:
     - React-callinvoker
     - React-Core
     - react-native-worklets-core
-  - VisionCameraOcr (2.0.1):
+  - VisionCameraOcr (2.1.1):
     - GoogleMLKit/TextRecognition (= 3.1.0)
     - React-Core
   - Yoga (1.14.0)
@@ -628,7 +628,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - VisionCamera (from `../node_modules/react-native-vision-camera`)
-  - "VisionCameraOcr (from `../node_modules/@ismaelmoreiraa/vision-camera-ocr`)"
+  - VisionCameraOcr (from `../..`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -745,7 +745,7 @@ EXTERNAL SOURCES:
   VisionCamera:
     :path: "../node_modules/react-native-vision-camera"
   VisionCameraOcr:
-    :path: "../node_modules/@ismaelmoreiraa/vision-camera-ocr"
+    :path: "../.."
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -817,10 +817,10 @@ SPEC CHECKSUMS:
   ReactCommon: 91ece8350ebb3dd2be9cef662abd78b6948233c0
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   VisionCamera: db57ca079c4f933f1ddd07f2f8fb2d171a826b85
-  VisionCameraOcr: 75e0811c6ee7588a45a41f4c4d9603aa996aa527
+  VisionCameraOcr: 2f3b773e8a00ad670db56057d56df6dd8fb2fc39
   Yoga: 86fed2e4d425ee4c6eab3813ba1791101ee153c6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 13351f31ad08137abff672fad51add20cfbab91f
+PODFILE CHECKSUM: 16bfc18f3f21cfdc073153a39400c44f2aefdde9
 
 COCOAPODS: 1.13.0
