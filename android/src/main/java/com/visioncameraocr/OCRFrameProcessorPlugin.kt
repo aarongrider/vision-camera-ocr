@@ -141,7 +141,7 @@
 
          @SuppressLint("UnsafeOptInUsageError")
          val mediaImage: Image? = frame.image
-         val orientation = Orientation.fromUnionValue(frame.orientation)
+         val orientation = Orientation.fromUnionValue(frame.orientation.toString())
 
          if (mediaImage != null && orientation!= null) {
              val image = InputImage.fromMediaImage(mediaImage, orientation.toDegrees())
