@@ -11,10 +11,10 @@
 
 + (void)load
 {
-  [FrameProcessorPluginRegistry addFrameProcessorPlugin:@"scanOCR"
-                                        withInitializer:^FrameProcessorPlugin* (NSDictionary* options) {
-    return [[OCRFrameProcessorPlugin alloc] init];
-  }];
+    [FrameProcessorPluginRegistry addFrameProcessorPlugin:@"scanOCR"
+                                        withInitializer:^FrameProcessorPlugin* (VisionCameraProxyHolder* proxy, NSDictionary* options) {
+        return [[OCRFrameProcessorPlugin alloc] initWithProxy:proxy withOptions:options];
+    }];
 }
 
 @end
