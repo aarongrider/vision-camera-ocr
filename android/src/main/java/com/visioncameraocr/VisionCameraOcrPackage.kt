@@ -12,8 +12,8 @@
      override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
          if(!OCRFrameProcessorPlugin.isRegistered){
              OCRFrameProcessorPlugin.isRegistered = true
-             FrameProcessorPluginRegistry.addFrameProcessorPlugin("scanOCR") {
-                 OCRFrameProcessorPlugin(it)
+             FrameProcessorPluginRegistry.addFrameProcessorPlugin("scanOCR") { _ , options =>
+                 OCRFrameProcessorPlugin(options)
              }
          }
          return emptyList()

@@ -17,7 +17,7 @@
  import com.mrousavy.camera.frameprocessor.FrameProcessorPlugin
  import com.mrousavy.camera.types.Orientation
 
- class OCRFrameProcessorPlugin(options: MutableMap<String, Any>?) : FrameProcessorPlugin(options) {
+ class OCRFrameProcessorPlugin(options: MutableMap<String, Any>?) : FrameProcessorPlugin() {
 
      private fun getBlockArray(blocks: MutableList<Text.TextBlock>): List<HashMap<String, Any?>> {
          val blockArray = mutableListOf<HashMap<String, Any?>>()
