@@ -54,13 +54,7 @@ export default function App() {
 
     console.log(
       '🚀 ~ file: App.tsx:68 ~ frameProcessor ~ data:',
-      JSON.stringify(
-        data.result?.blocks?.map(_ =>
-          _.lines.map(_ => _.elements.map(_ => _.symbols)),
-        ),
-        null,
-        2,
-      ),
+      data.result?.blocks.map((block: any) => block.text),
     );
 
     setOcrJS({...data});

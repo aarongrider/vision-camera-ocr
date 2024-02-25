@@ -45,8 +45,6 @@ target 'VisionCameraOcrExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  pod 'VisionCameraOcr', :path => '../..'
-  # pod 'vision-camera-ocr', :path => '../..'
   
   target 'VisionCameraOcrExampleTests' do
     inherit! :complete

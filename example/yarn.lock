@@ -1214,6 +1214,9 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@ismaelmoreiraa/vision-camera-ocr@./..":
+  version "2.2.4"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -5448,15 +5451,15 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-vision-camera@^3.7.1:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/react-native-vision-camera/-/react-native-vision-camera-3.7.1.tgz#e8bdf5e6a61533fbf34be393acd9d8f5d24168a8"
-  integrity sha512-jhcLiDCOFaYEeu2UhZjK1Yft+eOC0uzrHkShWF0XOH3BioBYAxs1bec0RUItCGAvzbPePIC07KwB74PaJu0Zxw==
+react-native-vision-camera@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-vision-camera/-/react-native-vision-camera-3.9.0.tgz#6a96a6cbad53c2db84d671c388b250327681a553"
+  integrity sha512-q0HejFTS56s5DXWHZhlWLLZMKn/8OXALrqET+FySPIKskwYEdJ5rOV2aDlD6hlo67qCNFGUIMZWGFFc9L2os1g==
 
-react-native-worklets-core@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/react-native-worklets-core/-/react-native-worklets-core-0.2.4.tgz#a4a79c04f2c6769ff03e96b7529c8638c88fa560"
-  integrity sha512-NKqxLRDOYfO7RJRZHHDA/1yztdiSadSTTILgHw2VwSrcQcmnWAZGXWr9EYpzKblpbk/vXfJa6QpWIKHjNrbe4w==
+react-native-worklets-core@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-worklets-core/-/react-native-worklets-core-0.3.0.tgz#4d6c4c4999d3bf2f8c67fa46fdd70d8b5bc7ba0e"
+  integrity sha512-bOoo6xbl+f+mz0Q65bLkUP3FxgYt7f/Bzi0c5Yj8Ix4vQCKMtgHwafrqCNRhW32N7TpTv3+zOoyQMJwQVr/frQ==
   dependencies:
     string-hash-64 "^1.0.3"
 
