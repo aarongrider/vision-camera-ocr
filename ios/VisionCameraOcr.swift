@@ -2,11 +2,13 @@ import Vision
 import AVFoundation
 import MLKitVision
 import MLKitTextRecognition
+import CoreImage
+import UIKit
 
 @objc(OCRFrameProcessorPlugin)
-public class OCRFrameProcessorPlugin: NSObject, FrameProcessorPluginBase {
+public class OCRFrameProcessorPlugin: FrameProcessorPlugin {
     
-    private static var textRecognizer = TextRecognizer.textRecognizer()
+    private static let textRecognizer = TextRecognizer.textRecognizer(options: TextRecognizerOptions.init())
     
     private static func getBlockArray(_ blocks: [TextBlock]) -> [[String: Any]] {
         
@@ -18,6 +20,7 @@ public class OCRFrameProcessorPlugin: NSObject, FrameProcessorPluginBase {
                 "recognizedLanguages": getRecognizedLanguages(block.recognizedLanguages),
                 "cornerPoints": getCornerPoints(block.cornerPoints),
                 "frame": getFrame(block.frame),
+                "boundingBox": getBoundingBox(block.frame) as Any,
                 "lines": getLineArray(block.lines),
             ])
         }
@@ -35,6 +38,7 @@ public class OCRFrameProcessorPlugin: NSObject, FrameProcessorPluginBase {
                 "recognizedLanguages": getRecognizedLanguages(line.recognizedLanguages),
                 "cornerPoints": getCornerPoints(line.cornerPoints),
                 "frame": getFrame(line.frame),
+                "boundingBox": getBoundingBox(line.frame) as Any,
                 "elements": getElementArray(line.elements),
             ])
         }
@@ -51,6 +55,8 @@ public class OCRFrameProcessorPlugin: NSObject, FrameProcessorPluginBase {
                 "text": element.text,
                 "cornerPoints": getCornerPoints(element.cornerPoints),
                 "frame": getFrame(element.frame),
+                "boundingBox": getBoundingBox(element.frame) as Any,
+                "symbols": []
             ])
         }
         
@@ -105,23 +111,40 @@ public class OCRFrameProcessorPlugin: NSObject, FrameProcessorPluginBase {
         ]
     }
     
-    @objc
-    public static func callback(_ frame: Frame!, withArgs _: [Any]!) -> Any! {
+    private static func getBoundingBox(_ rect: CGRect?) -> [String: CGFloat]? {
+         return rect.map {[
+             "left": $0.minX,
+             "top": $0.maxY,
+             "right": $0.maxX,
+             "bottom": $0.minY
+         ]}
+    }
+    
+    public override func callback(_ frame: Frame, withArguments arguments: [AnyHashable: Any]?) -> Any? {
         
-        guard (CMSampleBufferGetImageBuffer(frame.buffer) != nil) else {
+        guard let imageBuffer = CMSampleBufferGetImageBuffer(frame.buffer) else {
           print("Failed to get image buffer from sample buffer.")
           return nil
         }
 
-        let visionImage = VisionImage(buffer: frame.buffer)
+        let ciImage = CIImage(cvPixelBuffer: imageBuffer)
+        
+        guard let cgImage = CIContext().createCGImage(ciImage, from: ciImage.extent) else {
+            print("Failed to create bitmap from image.")
+            return nil
+        }
+        
+        let image = UIImage(cgImage: cgImage)
+       
+        let visionImage = VisionImage(image: image)
         
         // TODO: Get camera orientation state
         visionImage.orientation = .up
         
         var result: Text
+        
         do {
-          result = try TextRecognizer.textRecognizer()
-            .results(in: visionImage)
+          result = try OCRFrameProcessorPlugin.textRecognizer.results(in: visionImage)
         } catch let error {
           print("Failed to recognize text with error: \(error.localizedDescription).")
           return nil
@@ -130,7 +153,7 @@ public class OCRFrameProcessorPlugin: NSObject, FrameProcessorPluginBase {
         return [
             "result": [
                 "text": result.text,
-                "blocks": getBlockArray(result.blocks),
+                "blocks": OCRFrameProcessorPlugin.getBlockArray(result.blocks),
             ]
         ]
     }

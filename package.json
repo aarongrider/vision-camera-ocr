@@ -1,6 +1,7 @@
 {
-  "name": "vision-camera-ocr",
-  "version": "1.0.0",
+  "name": "@ismaelmoreiraa/vision-camera-ocr",
+  "version": "2.3.1",
+  "private": false,
   "description": "VisionCamera Frame Processor Plugin to provide OCR support",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -13,7 +14,7 @@
     "android",
     "ios",
     "cpp",
-    "vision-camera-ocr.podspec",
+    "VisionCameraOcr.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
@@ -36,40 +37,46 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/aarongrider/vision-camera-ocr",
-  "author": "Aaron Grider <aaron.grider@gmail.com> (https://github.com/aarongrider)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismael/vision-camera-ocr.git"
+  },
+  "author": "Ismael Sousa <ismael1998sousa@gmail.com> (https://github.com/ismaelsousa)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aarongrider/vision-camera-ocr/issues"
+    "url": "https://github.com/ismaelsousa/vision-camera-ocr/issues"
   },
-  "homepage": "https://github.com/aarongrider/vision-camera-ocr#readme",
+  "homepage": "https://github.com/ismaelsousa/vision-camera-ocr#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "^3.0.0",
     "@release-it/conventional-changelog": "^2.0.0",
-    "@types/react": "^17.0.18",
     "@types/jest": "^26.0.0",
-    "@types/react-native": "0.64.13",
+    "@types/react": "^18.2.0",
+    "@types/react-native": "0.72.3",
     "commitlint": "^11.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^4.2.5",
-    "pod-install": "^0.1.26",
+    "pod-install": "^0.1.38",
     "prettier": "^2.0.5",
-    "react": "17.0.1",
-    "react-native": "0.64.2",
+    "react": "18.2.0",
+    "react-native": "0.72.5",
     "react-native-builder-bob": "^0.18.0",
-    "release-it": "^14.2.2",
-    "typescript": "^4.1.3",
-    "react-native-vision-camera": "^2.6.1",
-    "react-native-reanimated": "2.2.0"
+    "react-native-vision-camera": "^3.6.4",
+    "react-native-worklets-core": "^0.2.4",
+    "release-it": "^16.1.3",
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-vision-camera": "*",
+    "react-native-worklets-core": "*"
   },
   "jest": {
     "preset": "react-native",
