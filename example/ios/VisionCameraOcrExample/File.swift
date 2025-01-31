@@ -2,7 +2,7 @@
 //  File.swift
 //  VisionCameraOcrExample
 //
-//  Created by Rodrigo Gomes on 30/08/21.
+//  Created by Ismael Sousa on 06/10/23.
 //
 
 import Foundation

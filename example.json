@@ -1,0 +1,302 @@
+{
+  "result": {
+    "blocks": [
+      {
+        "recognizedLanguages": ["sv"],
+        "boundingBox": {
+          "top": -26,
+          "left": 546,
+          "bottom": 142,
+          "right": 666
+        },
+        "text": "DESIG",
+        "lines": [
+          {
+            "recognizedLanguages": ["sv"],
+            "boundingBox": {
+              "top": -26,
+              "left": 546,
+              "bottom": 143,
+              "right": 666
+            },
+            "elements": [
+              {
+                "boundingBox": {
+                  "top": -26,
+                  "left": 546,
+                  "bottom": 143,
+                  "right": 666
+                },
+                "text": "DESIG",
+                "cornerPoints": [
+                  {
+                    "x": 546,
+                    "y": 117
+                  },
+                  {
+                    "x": 603,
+                    "y": -26
+                  },
+                  {
+                    "x": 666,
+                    "y": 0
+                  },
+                  {
+                    "x": 609,
+                    "y": 143
+                  }
+                ],
+                "frame": {
+                  "boundingCenterY": 58,
+                  "x": 606,
+                  "width": 120,
+                  "y": 58.5,
+                  "boundingCenterX": 606,
+                  "height": 169
+                }
+              }
+            ],
+            "text": "DESIG",
+            "cornerPoints": [
+              {
+                "x": 546,
+                "y": 117
+              },
+              {
+                "x": 603,
+                "y": -26
+              },
+              {
+                "x": 666,
+                "y": 0
+              },
+              {
+                "x": 609,
+                "y": 143
+              }
+            ],
+            "frame": {
+              "boundingCenterY": 58,
+              "x": 606,
+              "width": 120,
+              "y": 58.5,
+              "boundingCenterX": 606,
+              "height": 169
+            }
+          }
+        ],
+        "cornerPoints": [
+          {
+            "x": 546,
+            "y": 117
+          },
+          {
+            "x": 603,
+            "y": -26
+          },
+          {
+            "x": 666,
+            "y": 0
+          },
+          {
+            "x": 609,
+            "y": 142
+          }
+        ],
+        "frame": {
+          "boundingCenterY": 58,
+          "x": 606,
+          "width": 120,
+          "y": 58,
+          "boundingCenterX": 606,
+          "height": 168
+        }
+      },
+      {
+        "recognizedLanguages": ["und-Latn"],
+        "boundingBox": {
+          "top": 135,
+          "left": 512,
+          "bottom": 237,
+          "right": 601
+        },
+        "text": "Domain\nDrven",
+        "lines": [
+          {
+            "recognizedLanguages": ["en"],
+            "boundingBox": {
+              "top": 143,
+              "left": 512,
+              "bottom": 225,
+              "right": 573
+            },
+            "elements": [
+              {
+                "boundingBox": {
+                  "top": 143,
+                  "left": 512,
+                  "bottom": 225,
+                  "right": 573
+                },
+                "text": "Domain",
+                "cornerPoints": [
+                  {
+                    "x": 512,
+                    "y": 212
+                  },
+                  {
+                    "x": 548,
+                    "y": 143
+                  },
+                  {
+                    "x": 573,
+                    "y": 156
+                  },
+                  {
+                    "x": 537,
+                    "y": 225
+                  }
+                ],
+                "frame": {
+                  "boundingCenterY": 184,
+                  "x": 542.5,
+                  "width": 61,
+                  "y": 184,
+                  "boundingCenterX": 542,
+                  "height": 82
+                }
+              }
+            ],
+            "text": "Domain",
+            "cornerPoints": [
+              {
+                "x": 512,
+                "y": 212
+              },
+              {
+                "x": 548,
+                "y": 143
+              },
+              {
+                "x": 573,
+                "y": 156
+              },
+              {
+                "x": 537,
+                "y": 225
+              }
+            ],
+            "frame": {
+              "boundingCenterY": 184,
+              "x": 542.5,
+              "width": 61,
+              "y": 184,
+              "boundingCenterX": 542,
+              "height": 82
+            }
+          },
+          {
+            "recognizedLanguages": ["und-Latn"],
+            "boundingBox": {
+              "top": 148,
+              "left": 546,
+              "bottom": 220,
+              "right": 604
+            },
+            "elements": [
+              {
+                "boundingBox": {
+                  "top": 148,
+                  "left": 546,
+                  "bottom": 220,
+                  "right": 604
+                },
+                "text": "Drven",
+                "cornerPoints": [
+                  {
+                    "x": 546,
+                    "y": 206
+                  },
+                  {
+                    "x": 580,
+                    "y": 148
+                  },
+                  {
+                    "x": 604,
+                    "y": 162
+                  },
+                  {
+                    "x": 570,
+                    "y": 220
+                  }
+                ],
+                "frame": {
+                  "boundingCenterY": 184,
+                  "x": 575,
+                  "width": 58,
+                  "y": 184,
+                  "boundingCenterX": 575,
+                  "height": 72
+                }
+              }
+            ],
+            "text": "Drven",
+            "cornerPoints": [
+              {
+                "x": 546,
+                "y": 206
+              },
+              {
+                "x": 580,
+                "y": 148
+              },
+              {
+                "x": 604,
+                "y": 162
+              },
+              {
+                "x": 570,
+                "y": 220
+              }
+            ],
+            "frame": {
+              "boundingCenterY": 184,
+              "x": 575,
+              "width": 58,
+              "y": 184,
+              "boundingCenterX": 575,
+              "height": 72
+            }
+          }
+        ],
+        "cornerPoints": [
+          {
+            "x": 512,
+            "y": 212
+          },
+          {
+            "x": 553,
+            "y": 135
+          },
+          {
+            "x": 601,
+            "y": 160
+          },
+          {
+            "x": 560,
+            "y": 237
+          }
+        ],
+        "frame": {
+          "boundingCenterY": 186,
+          "x": 556.5,
+          "width": 89,
+          "y": 186,
+          "boundingCenterX": 556,
+          "height": 102
+        }
+      }
+    ],
+    "text": "DESIG\nDomain\nDrven"
+  }
+}

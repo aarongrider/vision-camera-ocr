@@ -1,100 +1,130 @@
 /* eslint-disable react-native/no-inline-styles */
-import * as React from 'react';
+import React, {useState} from 'react';
 
-import { runOnJS } from 'react-native-reanimated';
+import {View, Text, LayoutChangeEvent} from 'react-native';
 import {
-  StyleSheet,
-  View,
-  Text,
-  LayoutChangeEvent,
-  PixelRatio,
-  TouchableOpacity,
-  Alert,
-  Clipboard,
-} from 'react-native';
-import { OCRFrame, scanOCR } from 'vision-camera-ocr';
-import {
-  useCameraDevices,
   useFrameProcessor,
   Camera,
+  useCameraDevice,
+  useCameraFormat,
 } from 'react-native-vision-camera';
 
-export default function App() {
-  const [hasPermission, setHasPermission] = React.useState(false);
-  const [ocr, setOcr] = React.useState<OCRFrame>();
-  const [pixelRatio, setPixelRatio] = React.useState<number>(1);
-  const devices = useCameraDevices();
-  const device = devices.back;
+// import {useSharedValue,} from 'react-native-worklets-core';
 
-  const frameProcessor = useFrameProcessor((frame) => {
+import {scanOCR} from '@ismaelmoreiraa/vision-camera-ocr';
+
+export default function App() {
+  const [dimensions, setDimensions] = useState({width: 1, height: 1});
+
+  // const frameWidthAndHeightRef = useSharedValue({height: 1, width: 1});
+
+  /**
+   * Camera
+   */
+  const [hasPermission, setHasPermission] = React.useState(false);
+  const [targetFps] = useState(60);
+
+  const [ocr, setOcr] = useState<any>();
+  // const setOcrJS = Worklets.createRunOnJS(setOcr);
+
+  const device = useCameraDevice('back');
+  console.log('🚀 ~ App ~ device:', device);
+  const format = useCameraFormat(device, [
+    {videoResolution: 'max'},
+    {photoResolution: 'max'},
+  ]);
+
+  const fps = Math.min(format?.maxFps ?? 1, targetFps);
+
+  const frameProcessor = useFrameProcessor(frame => {
     'worklet';
+
+    // frameWidthAndHeightRef.value = {
+    //   height: frame.height,
+    //   width: frame.width,
+    // };
+
     const data = scanOCR(frame);
-    runOnJS(setOcr)(data);
+    console.log('🚀 ~ frameProcessor ~ data:', JSON.stringify(data, null, 2));
+
+    // console.log(
+    //   '🚀 ~ file: App.tsx:68 ~ frameProcessor ~ data:',
+    //   data.result?.blocks.map((block: any) => block.text),
+    // );
+
+    // setOcrJS({...data});
   }, []);
 
   React.useEffect(() => {
     (async () => {
       const status = await Camera.requestCameraPermission();
-      setHasPermission(status === 'authorized');
+      setHasPermission(status === 'granted');
     })();
   }, []);
 
-  const renderOverlay = () => {
-    return (
-      <>
-        {ocr?.result.blocks.map((block) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                Clipboard.setString(block.text);
-                Alert.alert(`"${block.text}" copied to the clipboard`);
-              }}
-              style={{
-                position: 'absolute',
-                left: block.frame.x * pixelRatio,
-                top: block.frame.y * pixelRatio,
-                backgroundColor: 'white',
-                padding: 8,
-                borderRadius: 6,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 25,
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                }}
-              >
-                {block.text}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </>
-    );
-  };
+  // const renderOverlay = () => {
+  //   return (
+  //     <>
+  //       {ocr?.result?.blocks?.map((block, index) => {
+  //         const convertedWidth =
+  //           frameWidthAndHeightRef.value.width / dimensions.width;
+  //         const convertedHeight =
+  //           frameWidthAndHeightRef.value.height / dimensions.height;
+
+  //         return (
+  //           <TouchableOpacity
+  //             key={`${index}-${block.text}+${new Date().getTime()}}`}
+  //             onPress={() => {
+  //               Clipboard.setString(block.text);
+  //               Alert.alert(`"${block.text}" copied to the clipboard`);
+  //             }}
+  //             style={{
+  //               position: 'absolute',
+  //               left: block.frame.x / convertedHeight,
+  //               top: block.frame.y / convertedWidth,
+  //               backgroundColor: 'white',
+  //               padding: 8,
+  //               borderRadius: 6,
+  //               zIndex: 100,
+  //             }}>
+  //             <Text
+  //               style={{
+  //                 fontSize: 25,
+  //                 justifyContent: 'center',
+  //                 textAlign: 'center',
+  //                 color: 'black',
+  //               }}>
+  //               {block.text}
+  //             </Text>
+  //           </TouchableOpacity>
+  //         );
+  //       })}
+  //     </>
+  //   );
+  // };
 
   return device !== undefined && hasPermission ? (
     <>
       <Camera
-        style={[StyleSheet.absoluteFill]}
+        style={{width: '100%', height: '100%', flex: 1}}
         frameProcessor={frameProcessor}
         device={device}
+        fps={fps}
+        video
         isActive={true}
-        frameProcessorFps={5}
+        orientation="portrait"
+        format={format}
         onLayout={(event: LayoutChangeEvent) => {
-          setPixelRatio(
-            event.nativeEvent.layout.width /
-              PixelRatio.getPixelSizeForLayoutSize(
-                event.nativeEvent.layout.width
-              )
-          );
-        }}
-      />
-      {renderOverlay()}
+          setDimensions({
+            height: event.nativeEvent.layout.height,
+            width: event.nativeEvent.layout.width,
+          });
+        }}>
+        {/* {renderOverlay()} */}
+      </Camera>
     </>
   ) : (
-    <View>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>No available cameras</Text>
     </View>
   );
